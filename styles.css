@@ -4,8 +4,8 @@ body {
     text-align: center;
 }
 button {
-  border: none;
-  background-color: inherit;
+  border: solid;
+  background-color: green;
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
