@@ -6,8 +6,8 @@ body {
 button {
   border: solid;
   background-color: green;
-  padding: 14px 28px;
-  font-size: 16px;
+  padding: 14px 23px;
+  font-size: 20px;
   cursor: pointer;
   display: inline-block;
 }
