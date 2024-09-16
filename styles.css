@@ -1,5 +1,5 @@
 html{
-  font-family: "Montserrat", sans-serif;  
+  font-family: "Arial", sans-serif;  
   font-size: 1rem;
   color:black;
 }
@@ -7,7 +7,7 @@ html{
 body {
     margin: 10;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: #571d08 ;
+    background: bisque ;
     text-align: center;
 }
 button {
