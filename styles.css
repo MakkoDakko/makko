@@ -5,6 +5,7 @@ body {
 }
 button {
   border: solid;
+  font: bahnschrift;
   background-color: greenyellow;
   padding: 14px 23px;
   font-size: 20px;
