@@ -5,7 +5,7 @@ body {
 }
 button {
   border: solid;
-  font: bahnschrift;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: greenyellow;
   padding: 14px 23px;
   font-size: 20px;
