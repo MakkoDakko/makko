@@ -13,8 +13,8 @@ body {
 button {
   border: solid;
   background-color: greenyellow;
-  padding: 14px 23px;
-  font-size: 20px;
+  padding: 14px 16px;
+  font-size: 13px;
   cursor: pointer;
   display: inline-block;
 }
