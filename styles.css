@@ -1,13 +1,13 @@
 html{
   font-family: "Montserrat", sans-serif;  
   font-size: 1rem;
-  color: Gray;
+  color: rgb(0, 0, 0);
 }
 
 body {
     margin: 10;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: burlywood ;
+    background: rgb(87, 29, 8) ;
     text-align: center;
 }
 button {
