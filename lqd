@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>MakkoDakko's website</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+        }
+    </style>
+    
+</head>
+<a href="/makko/index.html"><button text-align="left">Trở về trang chủ</button></a>
+<body>
+    <h1>Chào mừng đến với web của Makko</h1>
+            <p>Họ tên: <strong>Đỗ Minh Khánh</strong></p>
+            <p>Ngày sinh: <em>10/12/2007</em></p>
+
+        <br>
+        <p>hello world &nbsp; Red Sox</p>
+        </body>
+</body>
+<footer>
+    <p style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">Website được tạo bởi: <font color="red"> Đỗ Minh Khánh </font> - Học sinh khóa 2022-2025 trường THPT Lê Quý Đôn - Thành phố Hồ Chí Minh.</p>
+</footer>
+</html>
+
+    
