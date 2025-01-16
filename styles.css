@@ -26,9 +26,8 @@ button {
 }
 
 button:hover {
-  background-color: blue;
+  background-color: #008cba;
   color: white;
-  cursor: pointer
 }
 
 footer {
