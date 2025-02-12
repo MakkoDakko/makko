@@ -38,5 +38,10 @@ footer {
 }
 table {
   border: 1px solid;
-  background-color: aqua;
+  border-collapse: collapse;
+  background-color: royalblue;
+}
+th, td {
+  padding: 5px;
+  text-align: center;
 }
