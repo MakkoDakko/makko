@@ -37,13 +37,21 @@ footer {
   height: 90px;
 }
 table {
-  border: 2px solid;
-  border-collapse: collapse;  
-  background-color: aqua;
+  border-collapse: collapse;
 }
-th, td {
+
+th {
   padding: 5px;
   border: 2px solid;
+  background-color: aqua;
+  border-color: red;
+  text-align: center;
+}
+
+td {
+  padding: 5px;
+  border: 2px solid;
+  background-color: aquamarine;
   border-color: red;
   text-align: center;
 }
