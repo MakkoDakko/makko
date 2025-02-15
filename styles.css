@@ -16,15 +16,15 @@ body {
 container {
       flex: 1 1 auto; 
 }
+
 button {
   border: solid;
   background-color: greenyellow;
-  padding: 15px 20px;
-  font-size: 19px;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
   display: inline-block;
 }
-
 button:hover {
   background-color: #008cba;
   color: white;
