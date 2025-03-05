@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Makko's website - lqd2</title>
+    <title>Makko's website</title>
     <style>
 html{
   font-family: "Arial", sans-serif;  
@@ -40,10 +40,11 @@ body {
 button {
   border: solid;
   background-color: greenyellow;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 20px;
   cursor: pointer;
   display: inline-block;
+  width: fit-content;
 }
 
 button:hover {
@@ -79,9 +80,8 @@ td {
     </style>
         
 </head>
-<a href="https://makkodakko.github.io/makko/index.html"><button>Trở về trang chủ</button></a>
 <body>
-    <h1><p><span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1.5rem; font-style: normal; font-weight:700;color:navy; letter-spacing: 0.5px; background-color: azure;">Chào mừng đến với web của Khánh</span></p></h1>
+    <h1>Chào mừng đến với web của Khánh</h1>
     <p>Họ tên: <strong>Đỗ Minh Khánh</strong></p>
     <p>Ngày sinh: <em>10/12/2007</em></p>
     <p>Học sinh lớp <strong>12A6</strong> trường <font color="red">THPT Lê Quý Đôn - TP.HCM</font></p>
@@ -213,15 +213,20 @@ td {
 <hr style="width:100%;text-align:left;margin-left:0" color="black">  
 <h2>Một bài hát mình thích nghe</h2>
 <iframe width="500" height="250" src="https://drive.google.com/file/d/1x16w94dklP_zcfl-roag0NRKZ6oHIMYK/preview"></iframe> 
-<p>Silver Scrapes - Danny McCarthy</p>   
+<p>Silver Scrapes - Tác giả: Danny McCarthy</p>   
 <br>
 <h3>Một bài hát khác mình cũng thích nghe</h3>
 <iframe width="560" height = '340' src = "https://www.youtube.com/embed/aJ5IzGBnWAc"></iframe>
+<p>Born For This - Tác giả: The Score</p>
 
 <hr style="width:100%;text-align:left;margin-left:0" color="black">  
    <h2>Một số bức ảnh mình yêu thích</h2>
+   <img src="https://media.giphy.com/media/1xkNbECNBlrJ8FsRxn/giphy.gif"
+   width="600px" alt="Chức vô địch năm 2018 của Boston Red Sox" title="2018 World Series champion">
+   <br>
    <img src="https://sportsposterwarehouse.com/cdn/shop/products/boston-red-sox-2018-world-champs-12-player-poster-aavq236_large.jpg"
    width="400px" alt="Chức vô địch năm 2018 của Boston Red Sox" title="2018 World Series champion">
+   
    <p>Chức vô địch World Series năm 2018 của <font color="red">Boston Red Sox</font></p>
    <br>
    <img src="https://images.mktw.net/im-339245" width ="560px" height="340" alt="Alisson's header" title="Alisson's header">
@@ -230,7 +235,7 @@ td {
 <hr style="width:100%;text-align:left;margin-left:0" color="black">  
 <h2><span style="font-family: Arial, Helvetica, sans-serif; font-size: 2.5rem; background-color: aliceblue; font-weight: 700; color: rgb(0,0,0);">Biểu mẫu góp ý</span></h2>
 <p>Xin bạn vui lòng bỏ ít thời gian góp ý cho trang portfolio của mình</p>
-<form method="POST" action="whatever.php">
+<form method="POST" action="">
     <label for="realname">Tên của bạn</label><br>
     <input type="text" id="realname" name="realname" value="" placeholder="Ví dụ: John Doe">
     <br>
@@ -244,14 +249,15 @@ td {
 </form>
 <br>
 <h2>Bạn biết đáp án của câu hỏi trên là gì không?</h2>
-<form method="POST" action="whatever.php">
+<form method="POST" action="">
     <label for="realname">Nhập đáp án ở đây</label>
     <br>
     <input type="text" id="answer" name="answer" value="">
     <br>
     <button type="submit">Gửi câu trả lời</button>
     </form>
-<hr style="width:100%;text-align:left;margin-left:0" color="black"> 
+<hr style="width:100%;text-align:left;margin-left:0" color="black">
+<h1><span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-style: italic;font-weight:700;font-size: xx-large;color:navy; letter-spacing: 0.5px; background-color: thistle;">Các loại biểu mẫu</span></h1> 
 <h2>Biểu mẫu đăng nhập</h2>
 <form action="">
     <label for="realname">Nhập tên người dùng</label>
@@ -262,11 +268,12 @@ td {
     
 </form>
 <br>
-    <h2>Tra google</h2>
+<h2>Tra google</h2>
 <form method="get" action="https://www.google.com/search" >
     <label>Nhập nội dung tìm kiếm</label>
     <input type="text" name="q"/>
-    <input type="submit" value="search" />
+    <button type="submit" value="search">Tìm kiếm</button>  
+</form>   
 <br>
 <h2>Dropdown</h2>
 <form action="">
@@ -279,8 +286,6 @@ td {
     </select>
     <button>Xác nhận đội đã chọn</button>
 <br>
-
-</form>    
 </body>
 
 <br>
