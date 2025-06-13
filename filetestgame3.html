@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hành Trình Giải Cứu Trái Đất - Phiên bản Hoạt động 100%</title>
+    <title>Trò chơi Giải cứu Trái Đất</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Toàn bộ CSS không thay đổi, giữ nguyên như phiên bản trước */
+        /* Toàn bộ CSS không thay đổi */
         :root {
             --color-earth-dark: #5D4037; --color-earth-light: #A1887F; --color-leaf-green: #4CAF50;
             --color-leaf-green-dark: #388E3C; --color-sky-blue: #03A9F4; --color-water-blue: #0288D1;
@@ -16,7 +16,6 @@
         html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--color-water-blue); }
         .hidden { display: none !important; }
         .fullscreen-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; transition: opacity 0.5s, visibility 0.5s; }
-        /* Cập nhật Background Images với màu nền dự phòng */
         #start-screen {
             display: flex;
             flex-direction: column;
@@ -24,7 +23,7 @@
             min-height: 100vh;
             justify-content: center;
             background-image: url('https://i.ibb.co/wNHtL7bV/Chat-GPT-Image-Jun-8-2025-08-36-34-PM.png');
-            background-color: #388E3C; /* Fallback color */
+            background-color: #388E3C;
             background-size: cover;
             background-position: center;
         }
@@ -46,11 +45,6 @@
         #game-container { aspect-ratio: 4 / 3; width: 75vw; max-width: 110vh; height: auto; position: relative; border: 2px solid #ccc; border-radius: 10px; overflow: hidden; }
         .back-button { margin-top: 10px; padding: 5px 10px; width: 100%; background-color: var(--color-earth-light); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
         .back-button:hover { background-color: var(--color-earth-dark); }
-        #sound-control-container { position: absolute; bottom: 20px; right: 20px; z-index: 101; display: flex; align-items: center; gap: 10px; }
-        #sound-toggle { width: 40px; height: 40px; background-size: contain; cursor: pointer; }
-        #sound-toggle.on { background-image: url('https://cdn-icons-png.flaticon.com/512/159/159833.png'); }
-        #sound-toggle.off { background-image: url('https://cdn-icons-png.flaticon.com/512/159/159835.png'); }
-        #sound-label { color: white; font-weight: bold; text-shadow: 1px 1px 2px black; }
         .stage {
             width: 100%;
             height: 100%;
@@ -61,80 +55,20 @@
             background-size: cover;
             background-position: center;
         }
-        .stage.active { display: flex; flex-direction: column; justify-content: center; align-items: center; } /* Đã thêm flexbox để căn giữa nội dung */
-
-        /* Thay thế ảnh nền bằng màu sắc (với ảnh dự phòng) */
-        #stage-1 {
-            background-image: url('https://i.ibb.co/wNHtL7bV/Chat-GPT-Image-Jun-8-2025-08-36-34-PM.png');
-            background-color: #8BC34A; /* Fallback color */
-        }
-        #stage-2 {
-            background-image: url('https://i.ibb.co/zVyCQvWm/Chat-GPT-Image-Jun-8-2025-08-13-14-PM.png');
-            background-color: #2196F3; /* Fallback color */
-        }
-        #stage-3 {
-            background-image: url('https://i.ibb.co/0yNVmd8n/Chat-GPT-Image-Jun-8-2025-08-32-41-PM.png');
-            background-color: #9E9E9E; /* Fallback color */
-        }
-        #stage-4 {
-            background-image: url('https://i.ibb.co/0VXJwtvQ/Chat-GPT-Image-Jun-8-2025-08-17-26-PM.png');
-            background-color: #EF5350; /* Fallback color */
-        }
-        #stage-5 { background: #000; overflow: hidden; } /* Stage 5 chỉ cần màu đen */
-
-        /* Điều chỉnh task-panel để không bị chồng lấn trên màn hình chiến thắng */
-        .task-panel {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,.6);
-            color:#fff;
-            padding:10px 15px;
-            border-radius:8px;
-            font-size:16px;
-            z-index:10;
-        }
-        #stage-5 .task-panel { /* Ẩn task-panel trên màn hình chiến thắng nếu nó vẫn còn */
-            display: none;
-        }
-
-        #victory-content { /* Thêm style cho nội dung chiến thắng */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%; /* Đảm bảo chiếm toàn bộ chiều cao của stage-5 */
-            width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng của stage-5 */
-            text-align: center;
-            padding: 2vmin; /* Thêm padding tổng thể */
-            box-sizing: border-box; /* Bao gồm padding trong chiều rộng/cao */
-        }
-
-        #victory-content h2 {
-            font-size: 7vmin; /* Kích thước chữ lớn hơn cho tiêu đề */
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--color-leaf-green), 0 0 40px var(--color-leaf-green); /* Hiệu ứng phát sáng */
-            margin-bottom: 2rem;
-            animation: flicker 2s infinite alternate; /* Hiệu ứng nhấp nháy */
-        }
-        #victory-content p {
-            font-size: 3vmin;
-            color: white;
-            margin-top: 1rem;
-            margin-bottom: 3rem; /* Tăng khoảng cách với nút */
-            text-shadow: 1px 1px 3px black;
-        }
-
+        .stage.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        #stage-1 { background-image: url('https://i.ibb.co/wNHtL7bV/Chat-GPT-Image-Jun-8-2025-08-36-34-PM.png'); background-color: #8BC34A; }
+        #stage-2 { background-image: url('https://i.ibb.co/zVyCQvWm/Chat-GPT-Image-Jun-8-2025-08-13-14-PM.png'); background-color: #2196F3; }
+        #stage-3 { background-image: url('https://i.ibb.co/0yNVmd8n/Chat-GPT-Image-Jun-8-2025-08-32-41-PM.png'); background-color: #9E9E9E; }
+        #stage-4 { background-image: url('https://i.ibb.co/0VXJwtvQ/Chat-GPT-Image-Jun-8-2025-08-17-26-PM.png'); background-color: #EF5350; }
+        #stage-5 { background: #000; overflow: hidden; }
+        .task-panel { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,.6); color:#fff; padding:10px 15px; border-radius:8px; font-size:16px; z-index:10; }
+        #stage-5 .task-panel { display: none; }
+        #victory-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; text-align: center; padding: 2vmin; box-sizing: border-box; }
+        #victory-content h2 { font-size: 7vmin; font-weight: 900; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--color-leaf-green), 0 0 40px var(--color-leaf-green); margin-bottom: 2rem; animation: flicker 2s infinite alternate; }
+        #victory-content p { font-size: 3vmin; color: white; margin-top: 1rem; margin-bottom: 3rem; text-shadow: 1px 1px 3px black; }
         .clickable { position: absolute; cursor: pointer; transition: transform 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .clickable:hover { transform: scale(1.1); }
-        .clickable::after {
-            content: attr(data-label);
-            color: white; font-weight: 700; text-shadow: 1px 1px 3px black;
-            font-size: 1.5vmin; margin-top: 5px; background-color: rgba(0,0,0,0.3);
-            padding: 2px 5px; border-radius: 4px; white-space: nowrap;
-            position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%);
-        }
+        .clickable::after { content: attr(data-label); color: white; font-weight: 700; text-shadow: 1px 1px 3px black; font-size: 1.5vmin; margin-top: 5px; background-color: rgba(0,0,0,0.3); padding: 2px 5px; border-radius: 4px; white-space: nowrap; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); }
         .trash-bin { width: 18%; height: 28%; bottom: 5%; border-radius: 10px; }
         .trash-bin::after { bottom: 10px; font-size: 2vmin; }
         #bin-organic { left: 5%; background-color: var(--color-leaf-green-dark); border: 4px solid #1B5E20; }
@@ -145,8 +79,7 @@
         .tree-spot { background-color: #BCAAA4; border-radius: 50%; border: 2px dashed var(--color-earth-dark); }
         .tree-spot.planted { background-color: var(--color-earth-dark); border: none; }
         .tree-spot.planted::after { content: 'Đã Trồng' !important; }
-        /* Đảm bảo tán lá cây hiển thị đúng trên thân cây */
-        .tree-spot.planted::before { content: ''; position: absolute; width: 150%; height: 150%; bottom: 25%; left: -25%; background-color: var(--color-leaf-green); border-radius: 50%; z-index: 1; } /* Đã thay đổi z-index thành 1 */
+        .tree-spot.planted::before { content: ''; position: absolute; width: 150%; height: 150%; bottom: 25%; left: -25%; background-color: var(--color-leaf-green); border-radius: 50%; z-index: 1; }
         .ocean-trash { background-color: var(--color-pollution-gray); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; opacity: 0.8; }
         .turtle { background-color: var(--color-leaf-green-dark); border-radius: 45%; }
         .turtle::before { content: ''; position: absolute; width: 40%; height: 40%; top: -15%; left: 30%; background-color: var(--color-leaf-green); border-radius: 50%; }
@@ -156,8 +89,8 @@
         .pollution-source.placed { background-color: #CFD8DC; } .pollution-source.placed::after { background-color: var(--color-sky-blue); }
         .pollution-source.connected { background-color: var(--color-water-blue); } .pollution-source.connected::after { display: none; }
         .pollution-source.connected::before { content: ''; position: absolute; width: 120%; height: 40%; background: var(--color-water-blue); top: -50%; left: -10%; border: 2px solid #0D47A1; }
-        .boss { background-color: var(--color-pollution-dark); border-radius: 50%; box-shadow: 0 0 20px 5px var(--color-danger-red); }
-        .ocean-trash,.decoy-fish{animation:drift 15s linear infinite alternate}.turtle{animation:drift 25s linear infinite alternate}.pollution-source.glowing{box-shadow:0 0 25px 10px #fff}.boss.shielded{background-color: var(--color-danger-red); box-shadow: 0 0 25px 10px var(--color-danger-red); transform: scale(1.1); }@keyframes drift{100%{transform:translate(20px,40px)}}.stage-button{padding:10px 15px;font-size:1.8vmin;border-radius:8px;font-weight:700;border:2px solid var(--color-earth-light);background-color:#efebe9;color:var(--color-earth-dark)}.stage-button.active{border-color:var(--color-leaf-green-dark);background-color:#e8f5e9;color:var(--color-leaf-green-dark)}.stage-button.revived{border-color:var(--color-earth-dark);background-color:#d7ccc8;color:var(--color-earth-dark);cursor:default}.stage-button.revived::after{content:' ✅'}.task-panel{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;padding:10px 15px;border-radius:8px;font-size:16px;z-index:10}.task-panel ul{list-style:none;padding:0;margin:0}.task-panel ul li{margin-bottom:5px}.draggable{cursor:grab}.draggable:active{cursor:grabbing}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);display:flex;justify-content:center;align-items:center;z-index:200}.modal-content{background:#fff;padding:1.5rem;border-radius:.5rem;box-shadow:0 1rem 1.5rem rgba(0,0,0,.2);max-width:90vw;width:500px}.trash-bin.over{transform:scale(1.05);border-color:#fff;filter:brightness(1.2)}.trash-bin.incorrect-drop{animation:shake .5s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}#stage-progress{display:flex;flex-direction:column;gap:10px;justify-content:center}
+        .boss {background-color: var(--color-pollution-dark); border-radius: 50%; box-shadow: 0 0 20px 5px var(--color-danger-red); }
+        .ocean-trash,.decoy-fish{animation:drift 15s linear infinite alternate}.turtle{animation:drift 25s linear infinite alternate}.pollution-source.glowing{box-shadow:0 0 25px 10px #fff}.boss.shielded{background-color: var(--color-danger-red); box-shadow: 0 0 25px 10px var(--color-danger-red); transform: scale(1.1); }@keyframes drift{100%{transform:translate(20px,40px)}}.stage-button{padding:10px 15px;font-size:1.8vmin;border-radius:8px;font-weight:700;border:2px solid var(--color-earth-light);background-color:#efebe9;color:var(--color-earth-dark)}.stage-button.active{border-color:var(--color-leaf-green-dark);background-color:#e8f5e9;color:var(--color-leaf-green-dark)}.stage-button.revived{border-color:var(--color-earth-dark);background-color:#d7ccc8;color:var(--color-earth-dark);cursor:default}.stage-button.revived::after{content:' ✅'}.task-panel ul{list-style:none;padding:0;margin:0}.task-panel ul li{margin-bottom:5px}.draggable{cursor:grab}.draggable:active{cursor:grabbing}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);display:flex;justify-content:center;align-items:center;z-index:200}.modal-content{background:#fff;padding:1.5rem;border-radius:.5rem;box-shadow:0 1rem 1.5rem rgba(0,0,0,.2);max-width:90vw;width:500px}.trash-bin.over{transform:scale(1.05);border-color:#fff;filter:brightness(1.2)}.trash-bin.incorrect-drop{animation:shake .5s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}#stage-progress{display:flex;flex-direction:column;gap:10px;justify-content:center}
         #quiz-modal .quiz-option{display:block;width:100%;padding:12px;margin-top:10px;border:2px solid #ccc;border-radius:8px;text-align:left;background-color:#f9f9f9;cursor:pointer;transition:all .2s}#quiz-modal .quiz-option:hover{background-color:#e0e0e0}#quiz-modal .quiz-option.correct{background-color:var(--color-leaf-green);color:#fff;border-color:var(--color-leaf-green-dark)}#quiz-modal .quiz-option.incorrect{background-color:var(--color-danger-red);color:#fff;border-color:#b71c1c}#quiz-explanation{margin-top:15px;padding:10px;border-radius:5px;background-color:#eee}
         .firework{position:absolute;border-radius:50%;opacity:0;animation:firework-animation 1.2s ease-out forwards}@keyframes firework-animation{0%{transform:scale(0);opacity:1}100%{transform:scale(1.5);opacity:0}}
     </style>
@@ -171,8 +104,6 @@
                     <button id="start-btn" class="menu-button">Bắt đầu chơi</button>
                     <button id="story-btn" class="menu-button">Câu chuyện trò chơi</button>
                     <button id="how-to-play-btn" class="menu-button">Hướng dẫn</button>
-                    <a href="/makko/index.html"><button text-align="left">Trở về trang chủ</button></a>
-
                 </div></div>
     </div>
     <div id="difficulty-screen" class="fullscreen-menu hidden">
@@ -211,7 +142,6 @@
                 </div>
             </div>
         </div>
-        <div id="sound-control-container"><span id="sound-label">Âm thanh</span><div id="sound-toggle" class="on"></div></div>
     </div>
     <div id="story-modal" class="modal-overlay hidden"><div class="modal-content"><h2 class="text-2xl font-bold mb-4 text-center text-blue-800">Câu chuyện</h2><p class="text-gray-700 leading-relaxed">Ngày xửa ngày xưa, Trái Đất là một hành tinh xanh tươi, tràn đầy sức sống. Nhưng rồi, một thế lực tà ác mang tên "Quái vật Ô nhiễm" xuất hiện. Hắn gieo rắc rác thải, làm vẩn đục đại dương và bao trùm các thành phố trong khói bụi độc hại.<br><br>Sự sống dần lụi tàn. Nhưng hy vọng vẫn còn đó, le lói trong lời tiên tri về một người hùng sẽ đứng lên. Người đó, chính là bạn!<br><br>Nhiệm vụ của bạn là bắt đầu hành trình từ những khu rừng, vượt qua đại dương sâu thẳm, tiến vào các thành phố công nghiệp để chữa lành cho Trái Đất, và cuối cùng đối mặt với Quái vật Ô nhiễm để mang lại màu xanh vĩnh cửu cho hành tinh của chúng ta.</p><button onclick="closeModal('story-modal')" class="bg-gray-400 hover:bg-gray-500 text-white font-bold px-6 py-2 rounded-lg mt-6 w-full">Đóng</button></div></div>
     <div id="how-to-play-modal" class="modal-overlay hidden"><div class="modal-content"><h2 class="text-2xl font-bold mb-4 text-center text-blue-800">Hướng Dẫn</h2><div class="text-gray-700 text-left"><p class="mb-2"><strong>Mục tiêu:</strong> Hoàn thành nhiệm vụ ở mỗi màn chơi để hồi sinh Trái Đất.</p><p class="mb-2"><strong>Mức độ:</strong></p><ul class="list-disc list-inside mb-4"><li><strong>Dễ:</strong> Chơi thư giãn, không tính giờ.</li><li><strong>Trung bình & Khó:</strong> Bạn có 140 giây để hoàn thành cả 4 chặng. Hãy hoàn thành nhiệm vụ trước khi hết giờ! Làm sai yêu cầu sẽ bị trừ thời gian (Mức độ Khó sẽ bị trừ nhiều hơn mức Trung Bình).</li></ul><p class="mb-2"><strong>Cách chơi:</strong></p><ul class="list-disc list-inside"><li><strong class="text-green-600">Màn 1:</strong> Kéo thả rác đúng thùng.</li><li><strong class="text-blue-600">Màn 2:</strong> Click vào rác và kéo rùa về tổ.</li><li><strong class="text-gray-600">Màn 3:</strong> Click vào các nhà máy để sửa chữa.</li><li><strong class="text-red-600">Màn 4:</strong> Tấn công Trùm khi nó không có khiên màu đỏ.</li></ul></div><button onclick="closeModal('how-to-play-modal')" class="bg-gray-400 hover:bg-gray-500 text-white font-bold px-6 py-2 rounded-lg mt-6 w-full">Đã hiểu!</button></div></div>
@@ -221,26 +151,12 @@
     <div id="quiz-modal" class="modal-overlay hidden"><div class="modal-content"><h2 id="quiz-question" class="text-xl font-bold mb-4"></h2><div id="quiz-options"></div><div id="quiz-explanation" class="hidden"></div></div></div>
 
 <script>
-    const sounds = {
-        bgm: { play: () => {}, pause: () => {}, loop: false, volume: 0 }, // Placeholder for background music
-        click: { play: () => {} }, // Placeholder for click sound
-        dropSuccess: { play: () => {} },
-        dropFail: { play: () => {} },
-        plant: { play: () => {} },
-        win: { play: () => {} },
-        lose: { play: () => {} },
-        hit: { play: () => {} },
-        quizCorrect: { play: () => {} },
-        quizWrong: { play: () => {} }
-    };
-    let isSoundOn = false; // Set to false by default as sounds are disabled
-
     let currentStage, gameProgress, difficulty;
     const initialProgress = () => ({
         1: { trash: 0, tree: 0 },
         2: { trash: 0, turtle: 0 },
         3: { filter: 0, energy: 0 },
-        4: { bossHP: 450 } // Tăng HP của trùm từ 100 lên 400
+        4: { bossHP: 450 }
     });
 
     const difficultySettings = [
@@ -274,11 +190,9 @@
 
         if (draggedItem && draggedItem.dataset.type === target.dataset.type) {
             if (draggedItem.dataset.type === "organic" || draggedItem.dataset.type === "recyclable") {
-                playSound("dropSuccess");
                 gameProgress[1].trash++;
                 draggedItem.style.display = "none";
             } else if (draggedItem.dataset.type === "turtle") {
-                playSound("win");
                 guideTurtle(draggedItem);
             }
             updateTaskUI(currentStage);
@@ -306,7 +220,6 @@
         const treeSpot = event.currentTarget;
         if (treeSpot.classList.contains("planted")) return;
 
-        playSound("plant");
         gameProgress[1].tree++;
         updateTaskUI(1);
         treeSpot.classList.add("planted");
@@ -314,7 +227,6 @@
         checkStageComplete(1);
     }
     function removeOceanTrash(event) {
-        playSound("click");
         event.currentTarget.style.display = "none";
         gameProgress[2].trash++;
         updateTaskUI(2);
@@ -323,7 +235,6 @@
     function placeFilter(event) {
         const element = event.currentTarget;
         if (element.classList.contains("placed") || element.classList.contains("connected")) return;
-        playSound("click");
         gameProgress[3].filter++;
         updateTaskUI(3);
         element.classList.add("placed");
@@ -333,7 +244,6 @@
     function connectEnergy(event) {
         const element = event.currentTarget;
         if (element.classList.contains("placed") || element.classList.contains("connected")) return;
-        playSound("click");
         gameProgress[3].energy++;
         updateTaskUI(3);
         element.classList.add("connected");
@@ -345,7 +255,6 @@
             return deductTime();
         }
         if (gameProgress[4].bossHP <= 0) return;
-        playSound("hit");
         gameProgress[4].bossHP -= 10;
         if (gameProgress[4].bossHP < 0) gameProgress[4].bossHP = 0;
         updateTaskUI(4);
@@ -355,7 +264,7 @@
         checkStageComplete(4);
     }
     function deductTime() {
-    const penalty = difficultySettings[difficulty].penalty; // Hoặc giá trị cố định tùy bạn
+    const penalty = difficultySettings[difficulty].penalty;
     totalTimeLeft = Math.max(0, totalTimeLeft - penalty);
     updateTotalTimerBar();
 
@@ -367,11 +276,7 @@
     }
 }
 
-
-
-
     function nextStage() {
-        playSound("win");
         document.getElementById("stage-complete-modal").classList.add("hidden");
         clearInterval(timerInterval);
         clearInterval(bossInterval);
@@ -414,14 +319,12 @@
                     boss.classList.toggle("shielded", bossIsShielded);
                 }, shieldInterval);
             }
-
-
         }
     }
 
     function showStageCompletePopup() {
         const title = currentStage === 4 ? "Chiến Thắng!" : "Hoàn thành màn!";
-        const message = currentStage === 4 ? "Bạn đã đánh bại Quái vật Môi Trường và giải cứu Trái Đất!" : "Bạn đã hoàn thành nhiệm vụ màn này!";
+        const message = currentStage === 4 ? "Bạn đã đánh bại Quái vật và giải cứu Trái Đất!" : "Bạn đã hoàn thành nhiệm vụ màn này!";
         document.getElementById("stage-complete-title").innerText = title;
         document.getElementById("stage-complete-message").innerText = message;
         showModal("stage-complete-modal");
@@ -435,27 +338,26 @@
         currentStage = 1;
         gameProgress = initialProgress();
 
-        // Hide game screen and show start screen
         document.getElementById("game-screen").classList.add("hidden");
-        document.getElementById("start-screen").classList.remove("hidden"); // Remove hidden class
-        document.getElementById("start-screen").classList.remove("fading-out"); // Remove fading-out if present
-        document.getElementById("difficulty-screen").classList.add("hidden", "fading-out"); // Ensure difficulty screen is hidden
+        document.getElementById("start-screen").classList.remove("hidden");
+        document.getElementById("start-screen").classList.remove("fading-out");
+        document.getElementById("difficulty-screen").classList.add("hidden", "fading-out");
 
-        // Hide game over modal if it's open
-        closeModal("game-over-modal"); // FIX: Close game-over-modal when returning to start screen
-        closeModal("quiz-modal"); // Close quiz modal if open
+        closeModal("game-over-modal");
+        closeModal("quiz-modal");
 
-        // Remove all dynamically created game items from previous game sessions
-        // We ensure all game items are created with a 'dynamic-game-item' class
         document.querySelectorAll('.dynamic-game-item').forEach(item => {
             item.remove();
         });
 
-        // Reset UI for stages (e.g., active class, revived class)
-        // Resetting UI based on currentStage (which is 1)
+        const bossElement = document.querySelector("#stage-4 .boss");
+        if(bossElement) {
+            bossElement.style.display = 'flex'; // Or 'block', depending on its original display type
+        }
+
         updateStageProgressUI();
         if (totalTimerInterval) clearInterval(totalTimerInterval); 
-        document.getElementById("total-timer-container").style.display = "none"; // Ẩn thanh tổng
+        document.getElementById("total-timer-container").style.display = "none";
 
     }
 
@@ -552,49 +454,19 @@ const quizzes = [
 
 
     document.addEventListener("DOMContentLoaded", () => {
-        const soundToggle = document.getElementById("sound-toggle");
-        soundToggle.onclick = toggleSound;
-        
-        // Attach event listener for the "Tiếp tục" button in stage complete modal
         document.getElementById("next-stage-btn").addEventListener("click", nextStage);
-        // Attach event listener for the "Chơi Lại" button in victory screen
         document.getElementById("play-again-btn").addEventListener("click", returnToStartScreen);
 
-
-        // Common click sound for all other buttons (if not handled by specific listeners)
-        document.querySelectorAll("button:not(#next-stage-btn):not(#play-again-btn)").forEach(button => {
-            if (!button.onclick) { // Only attach if no inline onclick is present
-                button.addEventListener("click", () => playSound("click"));
-            }
-        });
-
-
-        // Existing start menu buttons
         document.getElementById("start-btn").onclick = () => {
-    document.getElementById("start-screen").classList.add("fading-out");
-    setTimeout(() => {
-        document.getElementById("start-screen").classList.add("hidden");
-        document.getElementById("difficulty-screen").classList.remove("hidden", "fading-out");
-    }, 0);
-};
+            document.getElementById("start-screen").classList.add("fading-out");
+            setTimeout(() => {
+                document.getElementById("start-screen").classList.add("hidden");
+                document.getElementById("difficulty-screen").classList.remove("hidden", "fading-out");
+            }, 0);
+        };
         document.getElementById("story-btn").onclick = () => showModal("story-modal");
         document.getElementById("how-to-play-btn").onclick = () => showModal("how-to-play-modal");
     });
-
-    function playSound(effect) {
-    }
-
-    function toggleSound() {
-        isSoundOn = !isSoundOn;
-        const soundToggle = document.getElementById("sound-toggle");
-        soundToggle.classList.toggle("on", isSoundOn);
-        soundToggle.classList.toggle("off", !isSoundOn);
-    }
-
-    function showDifficultyScreen() {
-        document.getElementById("start-screen").classList.add("fading-out");
-        document.getElementById("difficulty-screen").classList.remove("hidden");
-    }
 
     function selectDifficulty(level) {
         difficulty = level;
@@ -631,14 +503,9 @@ const quizzes = [
     function startGame() {
         gameProgress = initialProgress();
         currentStage = 1;
-        for (let i = 1; i <= 5; i++) {
-            const stageElement = document.getElementById(`stage-${i}`);
-            if (stageElement) {
-                stageElement.classList.remove("active");
-            }
-        }
-
-        initializeGameItems(); // Create and append game items
+        document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+        
+        initializeGameItems(); 
         document.getElementById(`stage-1`).classList.add("active");
 
         for (let i = 1; i <= 5; i++) {
@@ -646,51 +513,30 @@ const quizzes = [
         }
         updateStageProgressUI();
         showIntroModal();
-        totalTimeLeft = totalTime;
-        updateTotalTimerBar();
-        document.getElementById("total-timer-container").style.display = "block";
-         if (difficulty === 0) { // 0 là mức Dễ
-        document.getElementById("total-timer-container").style.display = "none";
-        if (totalTimerInterval) clearInterval(totalTimerInterval);
-    } else {
-        totalTimeLeft = totalTime;
-        updateTotalTimerBar();
-        document.getElementById("total-timer-container").style.display = "block";
-        if (totalTimerInterval) clearInterval(totalTimerInterval);
-        totalTimerInterval = setInterval(() => {
-            totalTimeLeft--;
-            updateTotalTimerBar();
-            if (totalTimeLeft <= 0) {
-                clearInterval(totalTimerInterval);
-                document.getElementById("total-timer-container").style.display = "none";
-                document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian cho 4 màn, do đó bạn đã thua cuộc!";
-                showModal("game-over-modal");
-            }
-        }, 1000);
-    }
-        if (totalTimerInterval) clearInterval(totalTimerInterval);
-        totalTimerInterval = setInterval(() => {
-        totalTimeLeft--;
-        updateTotalTimerBar();
-        if (totalTimeLeft <= 0) {
-            clearInterval(totalTimerInterval);
+        
+        if (difficulty === 0) {
             document.getElementById("total-timer-container").style.display = "none";
-            const quizModal = document.getElementById("quiz-modal");
-            if (!quizModal.classList.contains("hidden")) {
-                closeModal("quiz-modal");
-    }
-    document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian cho 4 màn!";
-    showModal("game-over-modal");
-    document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian cho 4 màn, do đó bạn đã thua cuộc!";
-    showModal("game-over-modal");
+            if (totalTimerInterval) clearInterval(totalTimerInterval);
+        } else {
+            totalTimeLeft = totalTime;
+            updateTotalTimerBar();
+            document.getElementById("total-timer-container").style.display = "block";
+            if (totalTimerInterval) clearInterval(totalTimerInterval);
+            totalTimerInterval = setInterval(() => {
+                totalTimeLeft--;
+                updateTotalTimerBar();
+                if (totalTimeLeft <= 0) {
+                    clearInterval(totalTimerInterval);
+                    closeModal('quiz-modal');
+                    document.getElementById("total-timer-container").style.display = "none";
+                    document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian!";
+                    showModal("game-over-modal");
+                }
+            }, 1000);
         }
-    }, 1000);
-
     }
 
     function initializeGameItems() {
-        // Clear all dynamically created game items from previous game sessions
-        // This is crucial to prevent duplicate elements on subsequent game starts
         document.querySelectorAll('.dynamic-game-item').forEach(item => {
             item.remove();
         });
@@ -698,69 +544,29 @@ const quizzes = [
         gameItemsConfig.forEach(item => {
             const element = document.createElement("div");
             element.setAttribute("data-label", item.label);
-            element.classList.add("dynamic-game-item"); // Add common class for easy removal
-
-            // Assign attributes and styles
-            // Ensure `className` is appended, not overwritten
+            element.classList.add("dynamic-game-item");
             if (item.attributes.className) element.className += ` ${item.attributes.className}`;
             if (item.style) element.style.cssText = item.style;
             if (item.attributes.id) element.id = item.attributes.id;
             if (item.dataset) Object.assign(element.dataset, item.dataset);
-
-            // Set draggable attribute if applicable
             if (item.events && item.events.ondragstart) {
                 element.draggable = true;
             }
-
-            // Attach event listeners using addEventListener
             if (item.events) {
                 for (const eventType in item.events) {
-                    if (item.events.hasOwnProperty(eventType)) {
-                        const jsEventType = eventType.substring(2).toLowerCase();
-                        element.addEventListener(jsEventType, item.events[eventType]);
-                    }
+                    const jsEventType = eventType.substring(2).toLowerCase();
+                    element.addEventListener(jsEventType, item.events[eventType]);
                 }
             }
-
             const parentElement = document.getElementById(item.parentId);
             if (parentElement) {
-                // Always append directly to the parent stage.
                 parentElement.appendChild(element);
-            } else {
-                console.error(`Không tìm thấy phần tử cha cho item:`, item);
             }
         });
     }
 
-    function startStageTimer() {
-        if (difficulty === 0) { // Easy difficulty
-            document.getElementById("timer-container").classList.add("hidden");
-            return;
-        }
-        clearInterval(timerInterval);
-        timeLeft = difficultySettings[difficulty].time;
-
-        // Reset animation
-        timerBar.style.transition = "none";
-        timerBar.style.width = "100%";
-        setTimeout(() => {
-            timerBar.style.transition = `width ${timeLeft}s linear`;
-            timerBar.style.width = "0%";
-        }, 100);
-
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                playSound("lose"); 
-                document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian cho 4 màn, do đó bạn đã thua cuộc!";
-                showModal("game-over-modal");
-            }
-        }, 1000);
-    }
-
     function updateTaskUI(stageNum) {
-        if (stageNum > 4) return; // No tasks for stage 5
+        if (stageNum > 4) return;
         const taskPanelList = document.querySelector(`#stage-${stageNum} .task-panel ul`);
         if (!taskPanelList) return;
 
@@ -774,7 +580,7 @@ const quizzes = [
             taskPanelList.children[0].innerText = `Lắp trạm lọc: ${gameProgress[3].filter}/2`;
             taskPanelList.children[1].innerText = `Nối năng lượng sạch: ${gameProgress[3].energy}/1`;
         } else if (stageNum === 4) {
-            taskPanelList.children[0].innerText = `HP Trùm: ${gameProgress[4].bossHP}%`;
+            taskPanelList.children[0].innerText = `HP Trùm: ${Math.round(gameProgress[4].bossHP / 450 * 100)}%`;
         }
     }
 
@@ -795,6 +601,11 @@ const quizzes = [
             isComplete = true;
         } else if (stage === 4 && gameProgress[4].bossHP <= 0) {
             isComplete = true;
+            // **YÊU CẦU MỚI: Ẩn quái vật khi HP = 0**
+            const bossElement = document.querySelector("#stage-4 .boss");
+            if (bossElement) {
+                bossElement.style.display = 'none';
+            }
         }
 
         if (isComplete) {
@@ -802,136 +613,125 @@ const quizzes = [
             setTimeout(() => showQuiz(stage), 500);
         }
     }
-let usedQuizIndices = [];
-let quizTimer = null; // Khai báo ở ngoài để có thể clear toàn cục
+    
+    let usedQuizIndices = [];
+    let quizTimer = null;
 
-function showQuiz(stage) {
-    // Chọn ngẫu nhiên 1 câu chưa dùng cho mỗi lượt chơi
-    if (usedQuizIndices.length >= quizzes.length) usedQuizIndices = [];
-    let randomIndex;
-    do {
-        randomIndex = Math.floor(Math.random() * quizzes.length);
-    } while (usedQuizIndices.includes(randomIndex));
-    usedQuizIndices.push(randomIndex);
+    function showQuiz(stage) {
+        if (usedQuizIndices.length >= quizzes.length) usedQuizIndices = [];
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * quizzes.length);
+        } while (usedQuizIndices.includes(randomIndex));
+        usedQuizIndices.push(randomIndex);
 
-    const quiz = quizzes[randomIndex];
+        const quiz = quizzes[randomIndex];
 
+        let optionOrder = [0, 1, 2];
+        for (let i = optionOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [optionOrder[i], optionOrder[j]] = [optionOrder[j], optionOrder[i]];
+        }
+        const correctShuffledIndex = optionOrder.indexOf(quiz.answer);
 
-    let optionOrder = [0, 1, 2];
-    for (let i = optionOrder.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [optionOrder[i], optionOrder[j]] = [optionOrder[j], optionOrder[i]];
+        document.getElementById("quiz-question").innerText = quiz.question;
+        const quizOptionsDiv = document.getElementById("quiz-options");
+        quizOptionsDiv.innerHTML = "";
+        document.getElementById("quiz-explanation").classList.add("hidden");
+
+        let timeLeft = 10;
+        let timerDiv = document.createElement("div");
+        timerDiv.id = "quiz-timer";
+        timerDiv.style = "width:100%;height:10px;background:#eee;margin-bottom:8px;border-radius:5px;overflow:hidden;";
+        let bar = document.createElement("div");
+        bar.style = "height:100%;background:linear-gradient(90deg, #4CAF50, #FF9800);transition:width 0.2s linear;width:100%;";
+        timerDiv.appendChild(bar);
+        quizOptionsDiv.appendChild(timerDiv);
+
+        if (quizTimer) clearInterval(quizTimer);
+        quizTimer = setInterval(() => {
+            timeLeft -= 0.1;
+            if (timeLeft < 0) timeLeft = 0;
+            bar.style.width = `${(timeLeft/10)*100}%`;
+            if (timeLeft <= 0) {
+                clearInterval(quizTimer);
+                handleQuizTimeUp(correctShuffledIndex);
+            }
+        }, 100);
+
+        optionOrder.forEach((optionIdx, displayIdx) => {
+            const button = document.createElement("button");
+            button.className = "quiz-option";
+            button.innerText = quiz.options[optionIdx];
+            button.onclick = () => {
+                clearInterval(quizTimer);
+                checkQuizAnswer(displayIdx, correctShuffledIndex, quiz.explanation, button);
+            };
+            quizOptionsDiv.appendChild(button);
+        });
+
+        showModal("quiz-modal");
     }
-    // Vị trí mới của đáp án đúng trong mảng đã đảo
-    const correctShuffledIndex = optionOrder.indexOf(quiz.answer);
 
-    document.getElementById("quiz-question").innerText = quiz.question;
-    const quizOptionsDiv = document.getElementById("quiz-options");
-    quizOptionsDiv.innerHTML = "";
-    document.getElementById("quiz-explanation").classList.add("hidden");
-
-    // 10 giây trả lời
-    let timeLeft = 10;
-    let timerDiv = document.createElement("div");
-    timerDiv.id = "quiz-timer";
-    timerDiv.style = "width:100%;height:10px;background:#eee;margin-bottom:8px;border-radius:5px;overflow:hidden;";
-    let bar = document.createElement("div");
-    bar.style = "height:100%;background:linear-gradient(90deg, #4CAF50, #FF9800);transition:width 0.2s linear;width:100%;";
-    timerDiv.appendChild(bar);
-    quizOptionsDiv.appendChild(timerDiv);
-
-    // Xóa timer cũ nếu còn
-    if (quizTimer) clearInterval(quizTimer);
-    quizTimer = setInterval(() => {
-        timeLeft -= 0.1;
-        if (timeLeft < 0) timeLeft = 0;
-        bar.style.width = `${(timeLeft/10)*100}%`;
-        if (timeLeft <= 0) {
-            clearInterval(quizTimer);
-            handleQuizTimeUp(correctShuffledIndex);
-        }
-    }, 100);
-
-    // Tạo các nút đáp án với vị trí đã đảo
-    optionOrder.forEach((optionIdx, displayIdx) => {
-        const button = document.createElement("button");
-        button.className = "quiz-option";
-        button.innerText = quiz.options[optionIdx];
-        button.onclick = () => {
-            clearInterval(quizTimer); // Dừng đồng hồ khi chọn
-            checkQuizAnswer(displayIdx, correctShuffledIndex, quiz.explanation, button);
-        };
-        quizOptionsDiv.appendChild(button);
-    });
-
-    showModal("quiz-modal");
-}
-
-// Khi hết giờ, tô đáp án đúng, cho biết hết giờ
-function handleQuizTimeUp(correctShuffledIndex) {
-    const quizOptions = document.querySelectorAll("#quiz-options .quiz-option");
-    quizOptions.forEach((button, idx) => {
-        button.disabled = true;
-        if (idx === correctShuffledIndex) {
-            button.classList.add("correct");
-        } else {
-            button.classList.add("incorrect");
-        }
-    });
-    document.getElementById("quiz-explanation").innerText = "Hết thời gian! Bạn cần trả lời nhanh và chính xác hơn.";
-    document.getElementById("quiz-explanation").classList.remove("hidden");
-    setTimeout(() => {
-        closeModal("quiz-modal");
-        document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian trả lời câu hỏi, do đó bạn đã thua cuộc!";
-        showModal("game-over-modal");
-    }, 1200);
-}
-
-function checkQuizAnswer(selectedDisplayIdx, correctShuffledIndex, explanationText, clickedButton) {
-    const quizOptions = document.querySelectorAll("#quiz-options .quiz-option");
-    quizOptions.forEach((button, idx) => {
-        button.disabled = true;
-        if (idx === correctShuffledIndex) {
-            button.classList.add("correct");
-        } else {
-            button.classList.add("incorrect");
-        }
-    });
-
-    const explanationDiv = document.getElementById("quiz-explanation");
-    explanationDiv.innerText = explanationText;
-    explanationDiv.classList.remove("hidden");
-
-    if (selectedDisplayIdx === correctShuffledIndex) {
-        playSound("quizCorrect");
+    function handleQuizTimeUp(correctShuffledIndex) {
+        const quizOptions = document.querySelectorAll("#quiz-options .quiz-option");
+        quizOptions.forEach((button, idx) => {
+            button.disabled = true;
+            if (idx === correctShuffledIndex) {
+                button.classList.add("correct");
+            } else {
+                button.classList.add("incorrect");
+            }
+        });
+        document.getElementById("quiz-explanation").innerText = "Hết thời gian! Bạn cần trả lời nhanh và chính xác hơn.";
+        document.getElementById("quiz-explanation").classList.remove("hidden");
         setTimeout(() => {
             closeModal("quiz-modal");
-            showStageCompletePopup();
-        }, 3000);
-    } else {
-        playSound("quizWrong");
-        setTimeout(() => {
-            if (totalTimerInterval) clearInterval(totalTimerInterval);
-            document.getElementById("total-timer-container").style.display = "none";
-            closeModal("quiz-modal");
-            document.getElementById("game-over-message").innerText = "Bạn đã trả lời sai câu đố và thất bại! Chúc bạn may mắn lần sau";
+            document.getElementById("game-over-message").innerText = "Bạn đã hết thời gian trả lời câu hỏi, do đó bạn đã thua cuộc!";
             showModal("game-over-modal");
-        }, 3000);
+        }, 1200);
     }
-}
 
+    function checkQuizAnswer(selectedDisplayIdx, correctShuffledIndex, explanationText, clickedButton) {
+        const quizOptions = document.querySelectorAll("#quiz-options .quiz-option");
+        quizOptions.forEach((button, idx) => {
+            button.disabled = true;
+            if (idx === correctShuffledIndex) {
+                button.classList.add("correct");
+            } else {
+                button.classList.add("incorrect");
+            }
+        });
+
+        const explanationDiv = document.getElementById("quiz-explanation");
+        explanationDiv.innerText = explanationText;
+        explanationDiv.classList.remove("hidden");
+
+        if (selectedDisplayIdx === correctShuffledIndex) {
+            if (currentStage === 4) {
+                if (totalTimerInterval) clearInterval(totalTimerInterval);
+                document.getElementById("total-timer-container").style.display = "none";
+            }
+            setTimeout(() => {
+                closeModal("quiz-modal");
+                showStageCompletePopup();
+            }, 3000);
+        } else {
+            setTimeout(() => {
+                if (totalTimerInterval) clearInterval(totalTimerInterval);
+                document.getElementById("total-timer-container").style.display = "none";
+                closeModal("quiz-modal");
+                document.getElementById("game-over-message").innerText = "Bạn đã trả lời sai! Hãy thử lại nhé.";
+                showModal("game-over-modal");
+            }, 3000);
+        }
+    }
 
     function updateStageProgressUI() {
         document.querySelectorAll(".stage-button").forEach((button, index) => {
-            if (index < currentStage - 1) {
-                button.classList.remove("active");
-                button.classList.add("revived");
-            } else if (index === currentStage - 1) {
-                button.classList.add("active");
-                button.classList.remove("revived");
-            } else {
-                button.classList.remove("active", "revived");
-            }
+            button.classList.remove("active", "revived");
+            if (index < currentStage - 1) button.classList.add("revived");
+            else if (index === currentStage - 1) button.classList.add("active");
         });
     }
 
@@ -943,13 +743,8 @@ function checkQuizAnswer(selectedDisplayIdx, correctShuffledIndex, explanationTe
         if (totalTimerInterval) clearInterval(totalTimerInterval);
         document.getElementById("total-timer-container").style.display = "none";
 
-        playSound("win");
-
-        // Fireworks effect
         fireworkInterval = setInterval(() => {
-            for (let i = 0; i < 3; i++) {
-                createFirework();
-            }
+            for (let i = 0; i < 3; i++) createFirework();
         }, 500);
     }
 
@@ -960,19 +755,14 @@ function checkQuizAnswer(selectedDisplayIdx, correctShuffledIndex, explanationTe
         firework.style.top = `${Math.random() * 80}%`;
         firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
         document.getElementById("stage-5").appendChild(firework);
-
-        firework.addEventListener("animationend", () => {
-            firework.remove();
-        });
+        firework.addEventListener("animationend", () => firework.remove());
     }
     function updateTotalTimerBar() {
-    const bar = document.getElementById("total-timer-bar");
-    const label = document.getElementById("total-timer-label");
-    bar.style.width = `${(totalTimeLeft / totalTime) * 100}%`;
-    label.textContent = totalTimeLeft + "s";
-}
-
-
+        const bar = document.getElementById("total-timer-bar");
+        const label = document.getElementById("total-timer-label");
+        bar.style.width = `${(totalTimeLeft / totalTime) * 100}%`;
+        label.textContent = totalTimeLeft + "s";
+    }
 </script>
 </body>
 </html>
