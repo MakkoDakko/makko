@@ -1,35 +1,330 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Makko's website - landing (index)</title>
+
+    <title>MakkoDakko | Personal Website</title>
+
     <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: "Arial", sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
-    </style>
-    
-</head>
-<body>
-    <h1>MakkoDakko's website</h1>
-    <p><a href="/makko/helloworld.html" target="_blank"><button>Hello world</button></a></p>
-    <p><a href="/makko/home.html" target="_blank"><button>Home page</button></a></p>
-    <p><a href="/makko/socials.html" target="_blank"><button>My social accounts</button></a></p>
-    <p><a href="/makko/login.html" target="_blank"><button>Test login page</button></a></p>
-    <p><a href="/makko/suna.html" target="_blank"><button>Suna</button></a></p> 
-    <p><a href="/makko/lqd.html" target="_blank"><button>Le Quy Don material</button></a></p>
-    <p><a href="/makko/lqd2.html" target="_blank"><button>Le Quy Don material 2</button></a></p>
-    <p><a href="/makko/filetestgame3.html" target="_blank"><button>AI Hackathon Game</button></a></p>
 
-<hr style="width:100%;text-align:left;margin-left:0" color="black"> 
-<h2>Donate cho mình ở đây nhé</h2>
-    
-<p><a href="https://linktr.ee/minhkhanhdo" target="_blank"><button>Link donate</button></a></p>
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+
+        /* Hero */
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg,#38bdf8,#a855f7);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+        }
+
+
+        /* Cards */
+
+        .grid {
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 20px;
+            margin-top: 40px;
+
+        }
+
+
+        .card {
+
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+
+            border-radius: 18px;
+            padding: 25px;
+
+            text-decoration:none;
+            color:white;
+
+            transition:0.3s;
+
+            border:1px solid rgba(255,255,255,0.1);
+
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-8px);
+
+            background: rgba(255,255,255,0.15);
+
+            box-shadow:0 15px 30px rgba(0,0,0,0.3);
+
+        }
+
+
+        .card h2 {
+
+            font-size:1.3rem;
+            margin-bottom:10px;
+
+        }
+
+
+        .card p {
+
+            color:#cbd5e1;
+            font-size:0.9rem;
+
+        }
+
+
+
+        /* Donate */
+
+        .donate {
+
+            margin-top:50px;
+
+            text-align:center;
+
+            padding:30px;
+
+            background:rgba(255,255,255,0.08);
+
+            border-radius:20px;
+
+        }
+
+
+        .donate a {
+
+            display:inline-block;
+
+            margin-top:15px;
+
+            padding:12px 30px;
+
+            background:#22c55e;
+
+            color:white;
+
+            border-radius:50px;
+
+            text-decoration:none;
+
+            font-weight:bold;
+
+            transition:.3s;
+
+        }
+
+
+        .donate a:hover {
+
+            background:#16a34a;
+
+            transform:scale(1.05);
+
+        }
+
+
+
+        footer {
+
+            text-align:center;
+
+            margin-top:50px;
+
+            color:#94a3b8;
+
+            font-size:0.9rem;
+
+        }
+
+
+        footer strong {
+
+            color:white;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+<h1>MakkoDakko's Website</h1>
+
+<p>
+Welcome to my personal hub — projects, experiments, social media and memories.
+</p>
+
+</section>
+
+
+
+<div class="grid">
+
+
+<a class="card" href="/makko/helloworld.html" target="_blank">
+
+<h2>👋 Hello World</h2>
+
+<p>My first HTML experiment.</p>
+
+</a>
+
+
+<a class="card" href="/makko/home.html" target="_blank">
+
+<h2>🏠 Home Page</h2>
+
+<p>Main personal homepage.</p>
+
+</a>
+
+
+
+<a class="card" href="/makko/socials.html" target="_blank">
+
+<h2>🌐 Social Accounts</h2>
+
+<p>Find all my social platforms.</p>
+
+</a>
+
+
+
+<a class="card" href="/makko/login.html" target="_blank">
+
+<h2>🔐 Login Test</h2>
+
+<p>Experimental login page.</p>
+
+</a>
+
+
+
+<a class="card" href="/makko/suna.html" target="_blank">
+
+<h2>🤖 Suna</h2>
+
+<p>AI and creative experiments.</p>
+
+</a>
+
+
+
+<a class="card" href="/makko/lqd.html" target="_blank">
+
+<h2>🏫 Le Quy Don Material</h2>
+
+<p>School resources and memories.</p>
+
+</a>
+
+
+
+<a class="card" href="/makko/lqd2.html" target="_blank">
+
+<h2>📚 Le Quy Don Material 2</h2>
+
+<p>Additional school materials.</p>
+
+</a>
+
+
+
+<a class="card" href="/makko/filetestgame3.html" target="_blank">
+
+<h2>🎮 AI Hackathon Game</h2>
+
+<p>A small game project powered by AI.</p>
+
+</a>
+
+
+</div>
+
+
+
+<section class="donate">
+
+
+<h2>Support My Work</h2>
+
+<p>
+If you enjoy my projects, you can support me here.
+</p>
+
+
+<a href="https://linktr.ee/minhkhanhdo" target="_blank">
+
+💚 Donate / Linktree
+
+</a>
+
+
+</section>
+
+
+
+<footer>
+
+<p>
+Website created by:
+<strong>Đỗ Minh Khánh</strong>
+<br>
+Student of <strong>THPT Lê Quý Đôn - Ho Chi Minh City</strong>
+<br>
+2022 - 2025
+</p>
+
+
+</footer>
+
+
+</div>
+
 
 </body>
-<footer>
-    <p style=" position: flex; bottom: 0; left: 0; width: 100%; text-align: center;">Website được tạo bởi: <font color="red"> Đỗ Minh Khánh </font> - Học sinh khóa 2022-2025 trường <strong>THPT Lê Quý Đôn - Thành phố Hồ Chí Minh.</strong></p>
-</footer>
+
 </html>
